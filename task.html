@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>My Task</title>
+        <link rel="stylesheet" href="css/main.css">
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+  		<div id="example"></div>
+        
+
+  		<script type="text/babel">
+            class Block extends React.Component {
+                enter = () => {
+                    var value = this.refs.newTxt.value;
+                    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                    if (reg.test(value) == false) {
+                        document.getElementById("txt").style.color = "red";
+                        document.getElementById("txt").innerHTML ="Invalid Email " +value;
+                        alert('Invalid Email Address ->'+value);
+                        
+                    } else {
+                        document.getElementById("txt").style.color = "DarkGreen";      
+                        document.getElementById("txt").innerHTML ="Valid Email "+value; 
+
+                    };
+                        
+                };
+                render() {
+                    return ( <div className="box">
+                                <h1>Enter your email</h1>
+                                <form >
+                                    <input type="email" ref="newTxt" />
+                                    <button onClick={this.enter} className="btn light">Enter</button>
+                                </form>
+                                <p id="txt"></p>
+                            </div> ); 
+                }
+            }
+                
+            const app = document.getElementById("example")
+
+  			ReactDOM.render (<div className="field">
+                                <Block />
+                            </div>,app);
+
+  		</script>
+    </body>
+</html>
